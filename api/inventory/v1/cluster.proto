@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package api.inventory.v1;
+
+option go_package = "common/api/inventory/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.inventory.v1";
+
+import "inventory/v1/common.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+// The Cluster message
+message Cluster {
+	int64 id = 1;
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.Timestamp updated_at = 3;
+	Resource metadata = 4;
+	int64 resource_id = 5;
+	ClusterCommon cluster_common = 6;
+}
+
+// The ClusterCommon message
+message ClusterCommon {
+	string external_cluster_id = 1;
+	string cloud_provider_id = 2;
+	string api_server = 3;
+}
+
+// The ClusterOut message
+message ClusterOut {
+	ResourceOut metadata = 1;
+	ClusterCommon cluster_common = 2;
+}
+
+// The ClusterIn message
+message ClusterIn {
+	ResourceIn metadata = 1;
+	ClusterCommon cluster_common = 2;
+}
+
+// The ListClustersRequest message
+message ListClustersRequest {
+	int32 page = 1;
+	int32 size = 2;
+}
+
+// The ListClustersResponse message
+message ListClustersResponse {
+	PagedResponse response = 1;
+}
+
+// The GetClusterRequest message
+message GetClusterRequest {
+	int64 id = 1;
+}
+
+// The GetClusterResponse message
+message GetClusterResponse {
+	ClusterOut cluster = 1;
+}
+
+// The CreateClusterRequest message
+message CreateClusterRequest {
+	ClusterIn cluster = 1;
+}
+
+// The CreateClusterResponse message
+message CreateClusterResponse {
+	ClusterOut cluster = 1;
+}
+
+// The UpdateClusterRequest message
+message UpdateClusterRequest {
+	int64 id = 1;
+	ClusterIn cluster = 2;
+}
+
+// The UpdateClusterResponse message
+message UpdateClusterResponse {
+	ClusterOut cluster = 1;
+}
+
+// The DeleteClusterRequest message
+message DeleteClusterRequest {
+	int64 id = 1;
+}
+
+// The DeleteClusterResponse message {}
+message DeleteClusterResponse {
+
+}
+// The InventoryService service definition
+service ClusterService {
+	rpc ListClusters(ListClustersRequest) returns (ListClustersResponse) {
+		option (google.api.http) = {
+			get: "/api/inventory/v1.0/clusters"
+		};
+	}
+	rpc GetCluster(GetClusterRequest) returns (GetClusterResponse) {
+		option (google.api.http) = {
+			get: "/api/inventory/v1.0/clusters/{id}"
+		};
+	}
+	rpc CreateCluster(CreateClusterRequest) returns (CreateClusterResponse) {
+		option (google.api.http) = {
+			post: "/api/inventory/v1.0/clusters"
+			body: "cluster"
+		};
+	}
+	rpc UpdateCluster(UpdateClusterRequest) returns (UpdateClusterResponse) {
+		option (google.api.http) = {
+			put: "/api/inventory/v1.0/clusters/{id}"
+			body: "cluster"
+		};
+	}
+	rpc DeleteCluster(DeleteClusterRequest) returns (DeleteClusterResponse) {
+		option (google.api.http) = {
+			delete: "/api/inventory/v1.0/clusters/{id}"
+		};
+	}
+}

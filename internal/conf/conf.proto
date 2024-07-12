@@ -1,0 +1,50 @@
+syntax = "proto3";
+package kratos.api;
+
+option go_package = "common/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Server server = 1;
+  Data data = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+    string dialect = 3;
+    string sslmode = 4;
+    bool debug = 5;
+    int32 max_connections = 6;
+    string host = 7;
+    int32 port = 8;
+    string name = 9;
+    string username = 10;
+    string password = 11;
+
+    string db_ca_cert_file = 12;
+    string host_file = 13;
+    string port_file = 14;
+    string name_file = 15;
+    string username_file = 16;
+    string password_file = 17;
+  }
+  Database database = 1;
+}

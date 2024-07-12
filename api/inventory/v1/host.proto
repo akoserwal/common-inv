@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package api.inventory.v1;
+
+option go_package = "common/api/inventory/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.inventory.v1";
+
+import "inventory/v1/common.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+// The Host message
+message Host {
+	HostCommon host_common = 1;
+
+	int64 id = 2;
+	google.protobuf.Timestamp created_at = 3;
+	google.protobuf.Timestamp updated_at = 4;
+
+	int64 resource_id = 5;
+	Resource metadata = 6;
+}
+
+// The HostCommon message
+message HostCommon {
+	string bios_uuid = 1;
+	string fqdn = 2;
+	string insights_id = 3;
+	string provider_id = 4;
+	string provider_type = 5;
+	string satellite_id = 6;
+	string subscription_manager_id = 7;
+}
+
+// The HostOut message
+message HostOut {
+	ResourceOut metadata = 1;
+	HostCommon host_common = 2;
+}
+
+// The HostIn message
+message HostIn {
+	ResourceIn metadata = 1;
+	HostCommon host_common = 2;
+}
+
+// The ListHostsRequest message
+message ListHostsRequest {
+	int32 page = 1;
+	int32 size = 2;
+}
+
+// The ListHostsResponse message
+message ListHostsResponse {
+	PagedResponse response = 1;
+}
+
+// The GetHostRequest message
+message GetHostRequest {
+	int64 id = 1;
+}
+
+// The GetHostResponse message
+message GetHostResponse {
+	HostOut host = 1;
+}
+
+// The CreateHostRequest message
+message CreateHostRequest {
+	HostIn host = 1;
+}
+
+// The CreateHostResponse message
+message CreateHostResponse {
+	HostOut host = 1;
+}
+
+// The UpdateHostRequest message
+message UpdateHostRequest {
+	int64 id = 1;
+	HostIn host = 2;
+}
+
+// The UpdateHostResponse message
+message UpdateHostResponse {
+	HostOut host = 1;
+}
+
+// The DeleteHostRequest message
+message DeleteHostRequest {
+	int64 id = 1;
+}
+
+// The DeleteHostResponse message {}
+message DeleteHostResponse {}
+// The InventoryService service definition
+service HostService {
+	rpc ListHosts(ListHostsRequest) returns (ListHostsResponse) {
+		option (google.api.http) = {
+			get: "/api/inventory/v1.0/hosts"
+		};
+	}
+	rpc GetHost(GetHostRequest) returns (GetHostResponse) {
+		option (google.api.http) = {
+			get: "/api/inventory/v1.0/hosts/{id}"
+		};
+	}
+	rpc CreateHost(CreateHostRequest) returns (CreateHostResponse) {
+		option (google.api.http) = {
+			post: "/api/inventory/v1.0/hosts"
+			body: "host"
+		};
+	}
+	rpc UpdateHost(UpdateHostRequest) returns (UpdateHostResponse) {
+		option (google.api.http) = {
+			put: "/api/inventory/v1.0/hosts/{id}"
+			body: "host"
+		};
+	}
+	rpc DeleteHost(DeleteHostRequest) returns (DeleteHostResponse) {
+		option (google.api.http) = {
+			delete: "/api/inventory/v1.0/hosts/{id}"
+		};
+	}
+}

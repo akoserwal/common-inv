@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package api.inventory.v1;
+
+option go_package = "common/api/inventory/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.inventory.v1";
+
+
+import "google/protobuf/timestamp.proto";
+
+// The Resource message
+message Resource {
+	int64 id = 1;
+	string display_name = 2;
+	repeated ResourceTag tags = 3;
+	string resource_type = 4;
+	repeated Reporter reporters = 5;
+	google.protobuf.Timestamp created_at = 6;
+	google.protobuf.Timestamp updated_at = 7;
+}
+
+message ResourceTag {
+	int64 id = 1;  // don't send this in the REST API
+	int64 resource_id = 2;
+	string namespace = 3;
+	string key = 4;
+	string value = 5;
+}
+
+// The ResourceOut message
+message ResourceOut {
+	Resource resource = 1;
+	string href = 2;
+}
+
+// The ResourceIn message
+message ResourceIn {
+	string display_name = 1;
+	google.protobuf.Timestamp reporter_time = 2;
+	string console_href = 3;
+	string api_href = 4;
+	string resource_id_alias = 5;
+	repeated ResourceTag tags = 6;
+}
+
+// The Reporter message
+message Reporter {
+	string name = 1;
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.Timestamp last_updated_at = 3;
+	string type = 4;
+	string url = 5;
+	string console_href = 6;
+	string api_href = 7;
+	string resource_id_alias = 8;
+}
+
+// The PagedResponseMetadata message
+message PagedResponseMetadata {
+	int32 page = 1;
+	int32 size = 2;
+	int64 total = 3;
+}
+
+// The PagedResponse message (generic)
+message PagedResponse {
+	PagedResponseMetadata metadata = 1;
+	repeated ResourceOut items = 2;
+}

@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package api.inventory.v1;
+
+option go_package = "common/api/inventory/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.inventory.v1";
+
+import "inventory/v1/common.proto";
+import "google/api/annotations.proto";
+
+// The ListResourcesRequest message
+message ListResourcesRequest {
+	int32 page = 1;
+	int32 size = 2;
+}
+
+// The ListResourcesResponse message
+message ListResourcesResponse {
+	PagedResponse response = 1;
+}
+
+// The GetResourceRequest message
+message GetResourceRequest {
+	int64 id = 1;
+}
+
+// The GetResourceResponse message
+message GetResourceResponse {
+	ResourceOut resource = 1;
+}
+
+// The InventoryService service definition
+service ResourceService {
+	rpc ListResources(ListResourcesRequest) returns (ListResourcesResponse) {
+		option (google.api.http) = {
+			get: "/api/inventory/v1.0/resources"
+		};
+	}
+	rpc GetResource(GetResourceRequest) returns (GetResourceResponse) {
+		option (google.api.http) = {
+			get: "/api/inventory/v1.0/resources/{id}"
+		};
+	}
+}

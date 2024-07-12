@@ -1,0 +1,490 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /api/inventory/v1.0/clusters:
+        get:
+            tags:
+                - ClusterService
+            operationId: ClusterService_ListClusters
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: size
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.ListClustersResponse'
+        post:
+            tags:
+                - ClusterService
+            operationId: ClusterService_CreateCluster
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.inventory.v1.ClusterIn'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.CreateClusterResponse'
+    /api/inventory/v1.0/clusters/{id}:
+        get:
+            tags:
+                - ClusterService
+            operationId: ClusterService_GetCluster
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.GetClusterResponse'
+        put:
+            tags:
+                - ClusterService
+            operationId: ClusterService_UpdateCluster
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.inventory.v1.ClusterIn'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.UpdateClusterResponse'
+        delete:
+            tags:
+                - ClusterService
+            operationId: ClusterService_DeleteCluster
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.DeleteClusterResponse'
+    /api/inventory/v1.0/hosts:
+        get:
+            tags:
+                - HostService
+            operationId: HostService_ListHosts
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: size
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.ListHostsResponse'
+        post:
+            tags:
+                - HostService
+            operationId: HostService_CreateHost
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.inventory.v1.HostIn'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.CreateHostResponse'
+    /api/inventory/v1.0/hosts/{id}:
+        get:
+            tags:
+                - HostService
+            operationId: HostService_GetHost
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.GetHostResponse'
+        put:
+            tags:
+                - HostService
+            operationId: HostService_UpdateHost
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.inventory.v1.HostIn'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.UpdateHostResponse'
+        delete:
+            tags:
+                - HostService
+            operationId: HostService_DeleteHost
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.DeleteHostResponse'
+    /api/inventory/v1.0/resources:
+        get:
+            tags:
+                - ResourceService
+            operationId: ResourceService_ListResources
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: size
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.ListResourcesResponse'
+    /api/inventory/v1.0/resources/{id}:
+        get:
+            tags:
+                - ResourceService
+            operationId: ResourceService_GetResource
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.inventory.v1.GetResourceResponse'
+components:
+    schemas:
+        api.inventory.v1.ClusterCommon:
+            type: object
+            properties:
+                externalClusterId:
+                    type: string
+                cloudProviderId:
+                    type: string
+                apiServer:
+                    type: string
+            description: The ClusterCommon message
+        api.inventory.v1.ClusterIn:
+            type: object
+            properties:
+                metadata:
+                    $ref: '#/components/schemas/api.inventory.v1.ResourceIn'
+                clusterCommon:
+                    $ref: '#/components/schemas/api.inventory.v1.ClusterCommon'
+            description: The ClusterIn message
+        api.inventory.v1.ClusterOut:
+            type: object
+            properties:
+                metadata:
+                    $ref: '#/components/schemas/api.inventory.v1.ResourceOut'
+                clusterCommon:
+                    $ref: '#/components/schemas/api.inventory.v1.ClusterCommon'
+            description: The ClusterOut message
+        api.inventory.v1.CreateClusterResponse:
+            type: object
+            properties:
+                cluster:
+                    $ref: '#/components/schemas/api.inventory.v1.ClusterOut'
+            description: The CreateClusterResponse message
+        api.inventory.v1.CreateHostResponse:
+            type: object
+            properties:
+                host:
+                    $ref: '#/components/schemas/api.inventory.v1.HostOut'
+            description: The CreateHostResponse message
+        api.inventory.v1.DeleteClusterResponse:
+            type: object
+            properties: {}
+            description: The DeleteClusterResponse message {}
+        api.inventory.v1.DeleteHostResponse:
+            type: object
+            properties: {}
+            description: The DeleteHostResponse message {}
+        api.inventory.v1.GetClusterResponse:
+            type: object
+            properties:
+                cluster:
+                    $ref: '#/components/schemas/api.inventory.v1.ClusterOut'
+            description: The GetClusterResponse message
+        api.inventory.v1.GetHostResponse:
+            type: object
+            properties:
+                host:
+                    $ref: '#/components/schemas/api.inventory.v1.HostOut'
+            description: The GetHostResponse message
+        api.inventory.v1.GetResourceResponse:
+            type: object
+            properties:
+                resource:
+                    $ref: '#/components/schemas/api.inventory.v1.ResourceOut'
+            description: The GetResourceResponse message
+        api.inventory.v1.HostCommon:
+            type: object
+            properties:
+                biosUuid:
+                    type: string
+                fqdn:
+                    type: string
+                insightsId:
+                    type: string
+                providerId:
+                    type: string
+                providerType:
+                    type: string
+                satelliteId:
+                    type: string
+                subscriptionManagerId:
+                    type: string
+            description: The HostCommon message
+        api.inventory.v1.HostIn:
+            type: object
+            properties:
+                metadata:
+                    $ref: '#/components/schemas/api.inventory.v1.ResourceIn'
+                hostCommon:
+                    $ref: '#/components/schemas/api.inventory.v1.HostCommon'
+            description: The HostIn message
+        api.inventory.v1.HostOut:
+            type: object
+            properties:
+                metadata:
+                    $ref: '#/components/schemas/api.inventory.v1.ResourceOut'
+                hostCommon:
+                    $ref: '#/components/schemas/api.inventory.v1.HostCommon'
+            description: The HostOut message
+        api.inventory.v1.ListClustersResponse:
+            type: object
+            properties:
+                response:
+                    $ref: '#/components/schemas/api.inventory.v1.PagedResponse'
+            description: The ListClustersResponse message
+        api.inventory.v1.ListHostsResponse:
+            type: object
+            properties:
+                response:
+                    $ref: '#/components/schemas/api.inventory.v1.PagedResponse'
+            description: The ListHostsResponse message
+        api.inventory.v1.ListResourcesResponse:
+            type: object
+            properties:
+                response:
+                    $ref: '#/components/schemas/api.inventory.v1.PagedResponse'
+            description: The ListResourcesResponse message
+        api.inventory.v1.PagedResponse:
+            type: object
+            properties:
+                metadata:
+                    $ref: '#/components/schemas/api.inventory.v1.PagedResponseMetadata'
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.inventory.v1.ResourceOut'
+            description: The PagedResponse message (generic)
+        api.inventory.v1.PagedResponseMetadata:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                size:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+            description: The PagedResponseMetadata message
+        api.inventory.v1.Reporter:
+            type: object
+            properties:
+                name:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                lastUpdatedAt:
+                    type: string
+                    format: date-time
+                type:
+                    type: string
+                url:
+                    type: string
+                consoleHref:
+                    type: string
+                apiHref:
+                    type: string
+                resourceIdAlias:
+                    type: string
+            description: The Reporter message
+        api.inventory.v1.Resource:
+            type: object
+            properties:
+                id:
+                    type: string
+                displayName:
+                    type: string
+                tags:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.inventory.v1.ResourceTag'
+                resourceType:
+                    type: string
+                reporters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.inventory.v1.Reporter'
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: The Resource message
+        api.inventory.v1.ResourceIn:
+            type: object
+            properties:
+                displayName:
+                    type: string
+                reporterTime:
+                    type: string
+                    format: date-time
+                consoleHref:
+                    type: string
+                apiHref:
+                    type: string
+                resourceIdAlias:
+                    type: string
+                tags:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.inventory.v1.ResourceTag'
+            description: The ResourceIn message
+        api.inventory.v1.ResourceOut:
+            type: object
+            properties:
+                resource:
+                    $ref: '#/components/schemas/api.inventory.v1.Resource'
+                href:
+                    type: string
+            description: The ResourceOut message
+        api.inventory.v1.ResourceTag:
+            type: object
+            properties:
+                id:
+                    type: string
+                resourceId:
+                    type: string
+                namespace:
+                    type: string
+                key:
+                    type: string
+                value:
+                    type: string
+        api.inventory.v1.UpdateClusterResponse:
+            type: object
+            properties:
+                cluster:
+                    $ref: '#/components/schemas/api.inventory.v1.ClusterOut'
+            description: The UpdateClusterResponse message
+        api.inventory.v1.UpdateHostResponse:
+            type: object
+            properties:
+                host:
+                    $ref: '#/components/schemas/api.inventory.v1.HostOut'
+            description: The UpdateHostResponse message
+tags:
+    - name: ClusterService
+      description: The InventoryService service definition
+    - name: HostService
+      description: The InventoryService service definition
+    - name: ResourceService
+      description: The InventoryService service definition
