@@ -1,4 +1,19 @@
-# Kratos Project Template
+# Common Inventory 
+
+# Run the postgres
+`make postgres_up`
+
+# Run the migration
+`make migration`
+
+# Run
+`make run`
+
+Example
+curl http://localhost:8000/api/inventory/v1.0/clusters
+
+
+
 
 ## Install Kratos
 ```
